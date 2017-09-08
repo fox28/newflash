@@ -1,0 +1,27 @@
+<resources>
+
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/level0</item>
+        <item name="colorPrimaryDark">@color/level0</item>
+        <item name="colorAccent">@color/level0</item>
+    </style>
+
+    <style name="AppTheme.ShouCang" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mblank</item>
+        <item name="colorPrimaryDark">@color/mblank</item>
+        <item name="colorAccent">@color/mblank</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+</resources>
