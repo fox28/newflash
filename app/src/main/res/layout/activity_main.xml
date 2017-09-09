@@ -75,7 +75,7 @@
                             android:layout_height="32dp"
                             android:src="@mipmap/addition"/>
                     </FrameLayout>
-                    <com.isuhuo.kuaibao.view.MyImageView
+                    <com.isuhuo.newsflash.view.MyImageView
                         android:drawablePadding="4dp"
                         android:paddingLeft="6dp"
                         android:src="@drawable/cc_default_head"
@@ -102,12 +102,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@android:color/white">
-            <com.isuhuo.kuaibao.view.TabStripIndicator
+            <com.isuhuo.newsflash.view.TabStripIndicator
                 android:id="@+id/tabIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </com.isuhuo.kuaibao.view.TabStripIndicator>
+            </com.isuhuo.newsflash.view.TabStripIndicator>
             <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
