@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
  */
 
 public class SingleVolleyRequestQueue {
-    private static SingleVolleyRequestQueue singleQueue;
+    private static volatile SingleVolleyRequestQueue singleQueue;
     private RequestQueue requestQueue;
     private static Context context;
 
@@ -36,7 +36,7 @@ public class SingleVolleyRequestQueue {
      */
     public static SingleVolleyRequestQueue getInstance(Context context) {
         if (singleQueue == null) {
-            synchronized (context) { // 必须换成SingleVolleyRequestQueue???
+            synchronized (context) { // 必须换成SingleVolleyRequestQueue? 不必。
                 if (singleQueue == null) {
                     singleQueue = new SingleVolleyRequestQueue(context);
                 }
@@ -45,13 +45,6 @@ public class SingleVolleyRequestQueue {
         return singleQueue;
 
     }
-    //提供获取类对象的方法
-//    public static synchronized SingleVolleyRequestQueue getInstance(Context context){
-//        if (singleQueue == null){
-//            singleQueue = new SingleVolleyRequestQueue(context);
-//        }
-//        return singleQueue;
-//    }
     public  void  addToRequestQueue(Request req){
         getRequestQueue().add(req);
     }
