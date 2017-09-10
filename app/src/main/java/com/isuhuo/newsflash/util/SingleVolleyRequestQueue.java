@@ -9,13 +9,13 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by Administrator on 2016/5/6.
  */
-public class SlingleVolleyRequestQueue {
-    private static SlingleVolleyRequestQueue slingleQueue;
+public class SingleVolleyRequestQueue {
+    private static SingleVolleyRequestQueue slingleQueue;
     private RequestQueue requestQueue;
     private static Context context;
 
     //私有化构造
-    private SlingleVolleyRequestQueue(Context context){
+    private SingleVolleyRequestQueue(Context context){
         this.context = context;
         requestQueue = getRequestQueue();
     }
@@ -27,9 +27,9 @@ public class SlingleVolleyRequestQueue {
         return requestQueue;
     }
     //提供获取类对象的方法
-    public static synchronized SlingleVolleyRequestQueue getInstance(Context context){
+    public static synchronized SingleVolleyRequestQueue getInstance(Context context){
         if (slingleQueue == null){
-            slingleQueue = new SlingleVolleyRequestQueue(context);
+            slingleQueue = new SingleVolleyRequestQueue(context);
         }
         return slingleQueue;
     }
