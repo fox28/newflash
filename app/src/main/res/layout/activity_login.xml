@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#c2c2c2"
-        android:id="@+id/view">
+        >
     </View>
 
     <LinearLayout
@@ -91,6 +91,15 @@
             android:hint="密码"
             android:textColorHint="#c2c2c2"/>
     </LinearLayout>
+    <View
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c2c2c2"
+        >
+    </View>
+
     <Button
         android:id="@+id/log_bt"
         android:text="登录"
@@ -124,23 +133,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="|"/>
-        <TextView
-            android:textColor="#a0a0a0"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:layout_weight="4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="新用户？"/>
+        <!--<TextView-->
+            <!--android:textColor="#a0a0a0"-->
+            <!--android:textSize="14sp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="4"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="新用户？"/>-->
         <TextView
             android:id="@+id/login_zhuce"
-            android:textColor="#606060"
-            android:textSize="14sp"
+            android:textColor="@color/mblue"
+            android:textSize="15sp"
             android:gravity="center"
             android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="请点这里注册"/>
+            android:text="新用户？请这里注册"
+            />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -185,6 +195,7 @@
             android:id="@+id/login_wb"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginStart="30dp"
             android:src="@mipmap/umeng_socialize_sina_on"
             />
     </LinearLayout>
