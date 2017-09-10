@@ -29,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.BaseActivity;
 import com.isuhuo.newsflash.base.MyAppLocation;
+import com.isuhuo.newsflash.feedback.FeedbackActivity;
 import com.isuhuo.newsflash.login.LoginActivity;
 import com.isuhuo.newsflash.news.adapter.FragmentAdapter;
 import com.isuhuo.newsflash.news.fragment.MainBoutiqueFragment;
@@ -106,7 +107,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         fankui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                startActivity(intent);
+
             }
         });
         home_touxiang.setOnClickListener(new View.OnClickListener() {

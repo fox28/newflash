@@ -13,15 +13,18 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!--下面第一个搜索区域，包括一个搜索栏和一个分割线，外面的嵌套布局好像是多余的-->
             <LinearLayout
                 android:id="@+id/home_topline"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="vertical">
+                <!--下面是搜索栏，放在一个frame中-->
                 <FrameLayout
                     android:background="@color/level0"
                     android:layout_width="match_parent"
