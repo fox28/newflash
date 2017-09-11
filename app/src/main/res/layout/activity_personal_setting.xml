@@ -11,7 +11,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/setting_fanhui"
+            android:id="@+id/backArea"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -34,7 +34,6 @@
             android:textSize="16sp" />
     </FrameLayout>
 
-    <!--复制粘贴-->
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_below="@+id/common_head_title"
@@ -82,13 +81,13 @@
             android:background="@color/gray_pressed"/>
         <!--上面是分隔线，下面是用户账户名称-->
         <RelativeLayout
-            android:id="@+id/layout_user_profile_username"
+            android:id="@+id/layout_user_profile_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:background="#ffffff"
             android:paddingTop="10dp"
-            android:paddingBottom="10dip">
+            android:paddingBottom="10dp">
             <ImageView
                 android:id="@+id/user_arrow1"
                 android:layout_width="wrap_content"
@@ -108,12 +107,13 @@
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
             <TextView
-                android:id="@+id/tv_user_profile_name"
+                android:id="@+id/tv_user_profile_nick"
                 android:layout_toLeftOf="@id/user_arrow1"
+                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:paddingLeft="34dp"
+                android:layout_marginRight="30dp"
+                android:layout_centerVertical="true"
                 android:hint="默认默认"
                 android:textSize="16sp"
                 android:maxLines="1"
