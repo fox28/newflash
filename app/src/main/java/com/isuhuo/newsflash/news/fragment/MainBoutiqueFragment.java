@@ -48,7 +48,8 @@ import com.isuhuo.newsflash.util.Kuaibao;
 import com.isuhuo.newsflash.view.LoadingDialog;
 
 /**
- * 最新素报的Fragment，在主界面切换
+ * 最新素报的Fragment，
+ * 在主界面切换
  */
 
 public class MainBoutiqueFragment extends Fragment{

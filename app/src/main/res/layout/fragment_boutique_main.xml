@@ -1,15 +1,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.isuhuo.newsflash.news.fragment.MainBoutiqueFragment">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.isuhuo.newsflash.news.fragment.MainBoutiqueFragment">
 
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         ptr:ptrDrawable="@mipmap/update_xlist"
         ptr:ptrHeaderTextColor="#a2a2a2"
-        android:background="#fff"
+        android:background="@color/fragment_bg"
         android:overScrollMode="never"
         android:divider="@null"
         ptr:ptrShowIndicator="false"
