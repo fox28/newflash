@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.activity;
+package com.isuhuo.newsflash.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

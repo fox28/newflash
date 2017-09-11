@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.activity;
+package com.isuhuo.newsflash.ui.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

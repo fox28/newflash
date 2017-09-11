@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.activity;
+package com.isuhuo.newsflash.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,15 +30,15 @@ import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.BaseActivity;
 import com.isuhuo.newsflash.base.MyAppLocation;
 import com.isuhuo.newsflash.feedback.FeedbackActivity;
-import com.isuhuo.newsflash.login.LoginActivity;
-import com.isuhuo.newsflash.news.adapter.FragmentAdapter;
-import com.isuhuo.newsflash.news.fragment.MainBoutiqueFragment;
-import com.isuhuo.newsflash.news.fragment.MainHotFragment;
-import com.isuhuo.newsflash.news.fragment.MainBrowseFragment;
+import com.isuhuo.newsflash.ui.activity.login.LoginActivity;
+import com.isuhuo.newsflash.ui.adapter.FragmentAdapter;
+import com.isuhuo.newsflash.ui.fragment.MainBoutiqueFragment;
+import com.isuhuo.newsflash.ui.fragment.MainHotFragment;
+import com.isuhuo.newsflash.ui.fragment.MainBrowseFragment;
 import com.isuhuo.newsflash.setting.SettingActivity;
 import com.isuhuo.newsflash.util.UserBeen;
-import com.isuhuo.newsflash.view.MyImageView;
-import com.isuhuo.newsflash.view.TabStripIndicator;
+import com.isuhuo.newsflash.widget.MyImageView;
+import com.isuhuo.newsflash.widget.TabStripIndicator;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     public ViewPager viewPager;

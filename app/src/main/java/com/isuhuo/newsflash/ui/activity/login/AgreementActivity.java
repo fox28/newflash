@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.login;
+package com.isuhuo.newsflash.ui.activity.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import com.isuhuo.newsflash.R;
 /**
  * Created by 鱼 on 2017/8/26.
  */
-public class XieyiActivity extends AppCompatActivity {
+public class AgreementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

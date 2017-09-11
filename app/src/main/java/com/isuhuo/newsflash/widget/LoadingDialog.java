@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.view;
+package com.isuhuo.newsflash.widget;
 
 import android.app.Dialog;
 import android.content.Context;

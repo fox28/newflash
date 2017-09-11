@@ -1,15 +1,12 @@
 package com.isuhuo.newsflash.util;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 
 import com.isuhuo.newsflash.R;
-import com.isuhuo.newsflash.login.LoginActivity;
-import com.isuhuo.newsflash.news.activity.MainActivity;
-
-import java.util.ArrayList;
+import com.isuhuo.newsflash.ui.activity.login.LoginActivity;
+import com.isuhuo.newsflash.ui.activity.MainActivity;
 
 /**
  * Created by apple on 2017/3/30.

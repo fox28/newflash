@@ -17,7 +17,7 @@
         android:orientation="horizontal"
         android:visibility="gone"
         >
-        <com.isuhuo.newsflash.view.MyImageView
+        <com.isuhuo.newsflash.widget.MyImageView
             android:id="@+id/touxiangIv"
             android:layout_width="100dp"
             android:layout_height="100dp"

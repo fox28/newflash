@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.login;
+package com.isuhuo.newsflash.ui.activity.login;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.zhuce_xieyi:
-                Intent intent=new Intent(this,XieyiActivity.class);
+                Intent intent=new Intent(this,AgreementActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_usualLogin:

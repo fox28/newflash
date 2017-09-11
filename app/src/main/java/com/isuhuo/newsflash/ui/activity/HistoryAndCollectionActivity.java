@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.activity;
+package com.isuhuo.newsflash.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.isuhuo.newsflash.R;
-import com.isuhuo.newsflash.news.adapter.FragmentAdapter;
-import com.isuhuo.newsflash.news.fragment.HistoryNewsFragment;
-import com.isuhuo.newsflash.news.fragment.CollectionNewsFragment;
-import com.isuhuo.newsflash.view.TabStripIndicator;
+import com.isuhuo.newsflash.ui.adapter.FragmentAdapter;
+import com.isuhuo.newsflash.ui.fragment.HistoryNewsFragment;
+import com.isuhuo.newsflash.ui.fragment.CollectionNewsFragment;
+import com.isuhuo.newsflash.widget.TabStripIndicator;
 
 
 public class HistoryAndCollectionActivity extends AppCompatActivity {

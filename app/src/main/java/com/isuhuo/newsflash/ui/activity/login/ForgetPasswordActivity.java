@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.login;
+package com.isuhuo.newsflash.ui.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +38,7 @@ import butterknife.OnClick;
 /**
  * Created by 鱼 on 2017/8/26.
  */
-public class FindPwdActivity extends AppCompatActivity {
+public class ForgetPasswordActivity extends AppCompatActivity {
     private static final int TIME_CUT = 1;
     private static final int TIME_END = 2;
     @BindView(R.id.ll_back)
@@ -126,13 +126,13 @@ public class FindPwdActivity extends AppCompatActivity {
             public void onResponse(JSONObject jsonObject) {
                 try {
                     if (jsonObject.getString("status").equals("success")){
-                        ToastUtils.showToast(FindPwdActivity.this,jsonObject.getString("msg"));
+                        ToastUtils.showToast(ForgetPasswordActivity.this,jsonObject.getString("msg"));
                     //    MyAppLocation.user.setPassword(putNewPwd);
                         //保存新密码
-                        SpUtils.putUser(FindPwdActivity.this,"password",putNewPwd);
+                        SpUtils.putUser(ForgetPasswordActivity.this,"password",putNewPwd);
                         finish();
                     }else{
-                        ToastUtils.showToast(FindPwdActivity.this,jsonObject.getString("msg"));
+                        ToastUtils.showToast(ForgetPasswordActivity.this,jsonObject.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,7 +145,7 @@ public class FindPwdActivity extends AppCompatActivity {
             }
         }, mRegisterParams);
 
-        SingleVolleyRequestQueue.getInstance(FindPwdActivity.this).addToRequestQueue(postRequest);
+        SingleVolleyRequestQueue.getInstance(ForgetPasswordActivity.this).addToRequestQueue(postRequest);
     }
 
 
@@ -163,7 +163,7 @@ public class FindPwdActivity extends AppCompatActivity {
                         new Thread(new cutDownTask()){}.start();  //倒计时方法
                         JSONObject data = jsonObject.getJSONObject("data");
                         msg = data.getString("code");
-                        ToastUtils.showToast(FindPwdActivity.this,jsonObject.getString("msg"));
+                        ToastUtils.showToast(ForgetPasswordActivity.this,jsonObject.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -175,7 +175,7 @@ public class FindPwdActivity extends AppCompatActivity {
             }
         }, mPutParams);
 
-        SingleVolleyRequestQueue.getInstance(FindPwdActivity.this).addToRequestQueue(postRequest);
+        SingleVolleyRequestQueue.getInstance(ForgetPasswordActivity.this).addToRequestQueue(postRequest);
     }
 
     int time = 120;

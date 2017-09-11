@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.fragment;
+package com.isuhuo.newsflash.ui.fragment;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -41,11 +41,11 @@ import java.util.Map;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
-import com.isuhuo.newsflash.news.activity.MainActivity;
-import com.isuhuo.newsflash.news.activity.SearchDetailsWebActivity;
-import com.isuhuo.newsflash.news.adapter.DongdongSuBaoAdapter;
+import com.isuhuo.newsflash.ui.activity.MainActivity;
+import com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity;
+import com.isuhuo.newsflash.ui.adapter.DongdongSuBaoAdapter;
 import com.isuhuo.newsflash.util.Kuaibao;
-import com.isuhuo.newsflash.view.LoadingDialog;
+import com.isuhuo.newsflash.widget.LoadingDialog;
 
 /**
  * 最新素报的Fragment，

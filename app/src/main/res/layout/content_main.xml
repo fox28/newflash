@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.isuhuo.newsflash.news.activity.MainActivity"
+    tools:context="com.isuhuo.newsflash.ui.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <LinearLayout
@@ -14,12 +14,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/white">
-        <com.isuhuo.newsflash.view.TabStripIndicator
+        <com.isuhuo.newsflash.widget.TabStripIndicator
             android:id="@+id/tabIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </com.isuhuo.newsflash.view.TabStripIndicator>
+        </com.isuhuo.newsflash.widget.TabStripIndicator>
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="0dp"

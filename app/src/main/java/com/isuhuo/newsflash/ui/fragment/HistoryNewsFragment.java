@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.fragment;
+package com.isuhuo.newsflash.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -47,12 +47,12 @@ import java.util.Map;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
-import com.isuhuo.newsflash.news.activity.HistoryAndCollectionActivity;
-import com.isuhuo.newsflash.news.activity.SearchDetailsWebActivity;
-import com.isuhuo.newsflash.news.adapter.RootAdapter;
+import com.isuhuo.newsflash.ui.activity.HistoryAndCollectionActivity;
+import com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity;
+import com.isuhuo.newsflash.ui.adapter.RootAdapter;
 import com.isuhuo.newsflash.util.Kuaibao;
 import com.isuhuo.newsflash.util.TimeUtil;
-import com.isuhuo.newsflash.view.LoadingDialog;
+import com.isuhuo.newsflash.widget.LoadingDialog;
 
 /**
  * 历史记录

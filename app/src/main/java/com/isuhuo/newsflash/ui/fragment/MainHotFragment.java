@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.fragment;
+package com.isuhuo.newsflash.ui.fragment;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,14 +40,12 @@ import java.util.Map;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
-import com.isuhuo.newsflash.news.activity.MainActivity;
-import com.isuhuo.newsflash.news.activity.SearchDetailsWebActivity;
-import com.isuhuo.newsflash.news.adapter.DongdongSuBaoAdapter;
+import com.isuhuo.newsflash.ui.activity.MainActivity;
+import com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity;
+import com.isuhuo.newsflash.ui.adapter.DongdongSuBaoAdapter;
 import com.isuhuo.newsflash.util.Kuaibao;
-import com.isuhuo.newsflash.view.LoadingDialog;
-
-
-public class MainBrowseFragment extends Fragment {
+import com.isuhuo.newsflash.widget.LoadingDialog;
+public class MainHotFragment extends Fragment {
     private List<Kuaibao> list;
     private PullToRefreshListView listView;
     private DongdongSuBaoAdapter adapter;
@@ -129,7 +127,7 @@ public class MainBrowseFragment extends Fragment {
         params.put("pages", count+"");
         params.put("limit", "20");
         params.put("keyword", "");
-        params.put("sign", "3");
+        params.put("sign", 2+"");
         params.put("public_ids", "");
         params.put("ids", "");
         params.put("uid", "");
@@ -146,7 +144,6 @@ public class MainBrowseFragment extends Fragment {
                             listView.setAdapter(adapter);
                             if (isup) {
                                 listView.getRefreshableView().setSelectionFromTop(count * 20 - 20+1, listView.getHeight());
-//                                listView.getRefreshableView().setSelection(count * 10 - 13);
                                 isup = false;
                             }
                             adapter.notifyDataSetChanged();

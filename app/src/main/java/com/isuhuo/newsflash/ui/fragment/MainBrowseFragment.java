@@ -1,22 +1,20 @@
-package com.isuhuo.newsflash.news.activity;
+package com.isuhuo.newsflash.ui.fragment;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,84 +40,48 @@ import java.util.Map;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
-import com.isuhuo.newsflash.news.adapter.DongdongSuBaoAdapter;
+import com.isuhuo.newsflash.ui.activity.MainActivity;
+import com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity;
+import com.isuhuo.newsflash.ui.adapter.DongdongSuBaoAdapter;
 import com.isuhuo.newsflash.util.Kuaibao;
-import com.isuhuo.newsflash.view.LoadingDialog;
+import com.isuhuo.newsflash.widget.LoadingDialog;
 
-public class SearchActivity extends AppCompatActivity {
-    private EditText et;
-    private PullToRefreshListView listview;
-    private TextView cancel;
+
+public class MainBrowseFragment extends Fragment {
+    private List<Kuaibao> list;
+    private PullToRefreshListView listView;
+    private DongdongSuBaoAdapter adapter;
     int count=1;
     int total=0;
     boolean isup;
+    private PopupWindow popWindow;
     private LoadingDialog loadingDialog;
     private TextView foot;
     private String label="";
     private String type="";
     private String keyword="";
     private Date date;
+    private MainActivity activity;
     private Map<String,String> params;
-    private List<Kuaibao> list;
-    private DongdongSuBaoAdapter adapter;
     private int shoucCode = 0;
     private int index = 0;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        et = (EditText) findViewById(R.id.search_et);
-        listview =(PullToRefreshListView) findViewById(R.id.sousuo_list);
-        cancel=(TextView)findViewById(R.id.search_restaurant_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        loadingDialog=new LoadingDialog(this);
-
-        et.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(!s.toString().equals("")){
-                    keyword="/keyword/"+s.toString();
-                }else {
-                    keyword="";
-                }
-            }
-        });
-        et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId== EditorInfo.IME_ACTION_SEARCH ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER))
-                {
-                    list=new ArrayList<Kuaibao>();
-                    count=1;
-                    total=0;
-                    loadingDialog.show();
-                    initData();
-                    return true;
-                }
-                return false;
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_boutique_main, container, false);
+        activity = (MainActivity)getActivity();
+        listView = (PullToRefreshListView) v.findViewById(R.id.jiankang_list);
+        list = new ArrayList<>();
+        loadingDialog=new LoadingDialog(getActivity());
+        loadingDialog.show();
+        date = new Date();
         initView();
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        initData();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SearchActivity.this, SearchDetailsWebActivity.class);
+                Intent intent = new Intent(getActivity(), SearchDetailsWebActivity.class);
 
                 Log.e("tag", ""+adapter.getItem(position-1).getCollect_status());
                 intent.putExtra("id", adapter.getItem(position-1).getId());
@@ -133,6 +95,16 @@ public class SearchActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+        return v;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            MainActivity activity = (MainActivity) getActivity();
+            count = 1;
+        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -147,19 +119,21 @@ public class SearchActivity extends AppCompatActivity {
                 break;
         }
     }
+
     private void initData() {
-        if(listview.getRefreshableView().getFooterViewsCount()>0){
-            listview.getRefreshableView().removeFooterView(foot);
+        if(listView.getRefreshableView().getFooterViewsCount()>0){
+            listView.getRefreshableView().removeFooterView(foot);
         }
-        listview.setMode(PullToRefreshBase.Mode.BOTH);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         params = new HashMap<String, String>();
         params.put("pages", count+"");
         params.put("limit", "20");
-        params.put("keyword", keyword);
+        params.put("keyword", "");
+        params.put("sign", "3");
         params.put("public_ids", "");
         params.put("ids", "");
         params.put("uid", "");
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
         Request<JSONObject> request = new NormalPostRequest(URLMannager.Base_URL + URLMannager.Get_News,
 
@@ -167,11 +141,12 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         myJson(response);
-                        if(SearchActivity.this!=null) {
-                            adapter = new DongdongSuBaoAdapter( SearchActivity.this,list,R.layout.kuaibao_item);
-                            listview.setAdapter(adapter);
+                        if(getActivity()!=null) {
+                            adapter = new DongdongSuBaoAdapter(getContext(),list,R.layout.kuaibao_item);
+                            listView.setAdapter(adapter);
                             if (isup) {
-                                listview.getRefreshableView().setSelectionFromTop(count * 20 - 20+1, listview.getHeight());
+                                listView.getRefreshableView().setSelectionFromTop(count * 20 - 20+1, listView.getHeight());
+//                                listView.getRefreshableView().setSelection(count * 10 - 13);
                                 isup = false;
                             }
                             adapter.notifyDataSetChanged();
@@ -188,21 +163,17 @@ public class SearchActivity extends AppCompatActivity {
 
         requestQueue.add(request);
     }
-
     public void myJson(JSONObject jsonObj1){
 
         try {
             Log.d("==========ss",jsonObj1.toString());
-            if(jsonObj1.getString("status").equals("error")){
-                Toast.makeText(SearchActivity.this,"暂无数据",Toast.LENGTH_SHORT).show();
-            }
             if(jsonObj1.getString("status").equals("success")) {
                 JSONObject jsonObj2 = jsonObj1.getJSONObject("data");
                 if (!jsonObj2.isNull("totalpage")) {
                     total = Integer.valueOf(jsonObj2.getString("totalpage"));
                     if (total == count) {
-                        listview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                        listview.getRefreshableView().addFooterView(foot);
+                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                        listView.getRefreshableView().addFooterView(foot);
                     }
                 }
                 JSONArray array1 = jsonObj2.getJSONArray("list");
@@ -234,7 +205,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }else {
                 foot.setText(jsonObj1.getString("Message"));
-                listview.getRefreshableView().addFooterView(foot);
+                listView.getRefreshableView().addFooterView(foot);
             }
 
         } catch (JSONException e) {
@@ -242,29 +213,28 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
     private void initView() {
-        date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String currentDate = sdf.format(date); // 当期日期
-        listview.getLoadingLayoutProxy(true, false).setPullLabel("下拉可以刷新");
-        listview.getLoadingLayoutProxy(true, false).setReleaseLabel("松开立即刷新");
-        listview.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate);
-        listview.getLoadingLayoutProxy(false, true).setPullLabel("上拉刷新...");
-        listview.getLoadingLayoutProxy(false, true).setReleaseLabel("放开刷新...");
-        listview.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在加载...\t今天"+currentDate);
+        listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉可以刷新");
+        listView.getLoadingLayoutProxy(true, false).setReleaseLabel("松开立即刷新");
+        listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate);
+        listView.getLoadingLayoutProxy(false, true).setPullLabel("上拉刷新...");
+        listView.getLoadingLayoutProxy(false, true).setReleaseLabel("放开刷新...");
+        listView.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在加载...\t今天"+currentDate);
 
-        listview.setMode(PullToRefreshBase.Mode.BOTH);//同时支持上拉下拉刷新
+        listView.setMode(PullToRefreshBase.Mode.BOTH);//同时支持上拉下拉刷新
 
-        listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
                 String currentDate2 = sdf2.format(date); // 当期日期
-                listview.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在刷新数据\t今天"+currentDate2);
-                listview.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate2);
+                listView.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在刷新数据\t今天"+currentDate2);
+                listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate2);
                 date=new Date();
                 list=new ArrayList<Kuaibao>();
                 count=0;
-                listview.setMode(PullToRefreshBase.Mode.BOTH);//同时支持上拉下拉刷新
+                listView.setMode(PullToRefreshBase.Mode.BOTH);//同时支持上拉下拉刷新
                 new DataRefresh().execute();
             }
 
@@ -272,14 +242,14 @@ public class SearchActivity extends AppCompatActivity {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
                 String currentDate3 = sdf3.format(date); // 当期日期
-                listview.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在刷新数据\t今天"+currentDate3);
-                listview.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate3);
+                listView.getLoadingLayoutProxy(false, true).setRefreshingLabel("正在刷新数据\t今天"+currentDate3);
+                listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("正在刷新数据\t今天"+currentDate3);
                 date=new Date();
                 isup=true;
                 new DataRefresh().execute();
             }
         });
-        foot = new TextView(SearchActivity.this);
+        foot = new TextView(getContext());
         foot.setTextSize(12);
         foot.setTextColor(0xffa0a0a0);
         AbsListView.LayoutParams params2 = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 120);
@@ -300,14 +270,14 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            listview.onRefreshComplete();
+            listView.onRefreshComplete();
             count++;
             if(count<=total){
                 initData();
             }
             else{
-                Toast.makeText(SearchActivity.this,"己加载全部",Toast.LENGTH_SHORT).show();
-                listview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                Toast.makeText(getContext(),"己加载全部",Toast.LENGTH_SHORT).show();
+                listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
             }
         }
     }

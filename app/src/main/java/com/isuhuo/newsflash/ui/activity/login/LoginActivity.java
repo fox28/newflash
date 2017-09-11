@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.login;
+package com.isuhuo.newsflash.ui.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 break;
             case R.id.login_xiugai:
-                Intent intent1 = new Intent(this,FindPwdActivity.class);
+                Intent intent1 = new Intent(this,ForgetPasswordActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.login_zhuce:

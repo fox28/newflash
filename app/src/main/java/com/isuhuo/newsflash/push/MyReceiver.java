@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
-import com.isuhuo.newsflash.news.activity.SearchDetailsWebActivity;
+import com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.isuhuo.newsflash.news.adapter;
+package com.isuhuo.newsflash.ui.adapter;
 
 import android.content.Context;
 import android.view.View;

@@ -39,7 +39,7 @@
         android:label="快报"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.isuhuo.newsflash.news.activity.MainActivity">
+        <activity android:name="com.isuhuo.newsflash.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,28 +55,28 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.isuhuo.newsflash.news.activity.SearchDetailsWebActivity"
+            android:name="com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity"
             android:label="@string/title_activity_su_bao_web"
             android:theme="@style/AppTheme.ShouCang" />
         <activity
-            android:name="com.isuhuo.newsflash.news.activity.SearchActivity"
+            android:name="com.isuhuo.newsflash.ui.activity.SearchActivity"
             android:label="@string/title_activity_su_bao_find"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.isuhuo.newsflash.news.activity.HistoryAndCollectionActivity"
+            android:name="com.isuhuo.newsflash.ui.activity.HistoryAndCollectionActivity"
             android:label="@string/title_activity_history_news"
             android:theme="@style/AppTheme.ShouCang"></activity>
-        <activity android:name="com.isuhuo.newsflash.login.LoginActivity"
+        <activity android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/AppTheme.ShouCang"/>
-        <activity android:name="com.isuhuo.newsflash.login.FindPwdActivity"
+        <activity android:name=".ui.activity.login.ForgetPasswordActivity"
             android:theme="@style/AppTheme.ShouCang"/>
-        <activity android:name="com.isuhuo.newsflash.login.RegisterActivity"
+        <activity android:name=".ui.activity.login.RegisterActivity"
             android:theme="@style/AppTheme.ShouCang"/>
-        <activity android:name="com.isuhuo.newsflash.login.XieyiActivity"
+        <activity android:name=".ui.activity.login.AgreementActivity"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity android:name="com.isuhuo.newsflash.feedback.FeedbackActivity" />
 
-        <activity android:name="com.isuhuo.newsflash.news.activity.DetailActivity" />
+        <activity android:name="com.isuhuo.newsflash.ui.activity.DetailActivity" />
 
 
          <activity android:name="com.isuhuo.newsflash.setting.SettingActivity" />
