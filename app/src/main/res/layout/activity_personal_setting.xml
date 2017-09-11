@@ -114,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_centerVertical="true"
-                android:hint="默认默认"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:ellipsize="end"

@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.MyAppLocation;
 import com.isuhuo.newsflash.ui.activity.MainActivity;
+import com.isuhuo.newsflash.util.MFGT;
 import com.isuhuo.newsflash.util.SpUtils;
 import com.isuhuo.newsflash.util.UserBeen;
 
@@ -52,10 +53,12 @@ public class PersonalSettingActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.backArea:
+                MFGT.finish(PersonalSettingActivity.this);
                 break;
             case R.id.layout_user_profile_avatar:
                 break;
             case R.id.layout_user_profile_nickname:
+                MFGT.gotoUpdateNickActivity(PersonalSettingActivity.this);
                 break;
         }
     }

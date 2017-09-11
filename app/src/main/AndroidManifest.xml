@@ -282,6 +282,8 @@
 
         <activity android:name=".setting.PersonalSettingActivity">
         </activity>
+        <activity android:name=".setting.UpdateNickActivity">
+        </activity>
     </application>
 
 </manifest>

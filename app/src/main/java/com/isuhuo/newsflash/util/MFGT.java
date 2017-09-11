@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.setting.PersonalSettingActivity;
 import com.isuhuo.newsflash.setting.SettingActivity;
+import com.isuhuo.newsflash.setting.UpdateNickActivity;
 import com.isuhuo.newsflash.ui.activity.SearchActivity;
 import com.isuhuo.newsflash.ui.activity.login.LoginActivity;
 import com.isuhuo.newsflash.ui.activity.MainActivity;
@@ -69,5 +70,8 @@ public class MFGT {
 
     public static void gotoPersonalSettingActivity(Activity activity) {
         startActivity(activity, PersonalSettingActivity.class);
+    }
+    public static void gotoUpdateNickActivity(Activity activity) {
+        startActivity(activity, UpdateNickActivity.class);
     }
 }

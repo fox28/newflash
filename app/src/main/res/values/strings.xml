@@ -11,4 +11,8 @@
     <string name="title_activity_su_bao_web">SuBaoWebActivity</string>
     <string name="title_activity_su_bao_find">SuBaoFindActivity</string>
     <string name="title_activity_history_news">HistoryNewsActivity</string>
+    <string name="save">保存</string>
+    <string name="update_user_nick">更改昵称</string>
+    <string name="nick_name_connot_be_empty">昵称不能为空</string>
+    <string name="update_nick_fail_unmodify">昵称未修改</string>
 </resources>
