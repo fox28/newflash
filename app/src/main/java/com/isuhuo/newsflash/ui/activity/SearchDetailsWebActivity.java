@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,10 +24,15 @@ import java.util.Map;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.BaseActivity;
 
+import com.isuhuo.newsflash.base.MyAppLocation;
 import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
+import com.isuhuo.newsflash.util.UserBeen;
 
 public class SearchDetailsWebActivity extends BaseActivity {
+    private boolean isCollcet = false;
+    private UserBeen user;
+
     private WebView webView;
     private LinearLayout back;
     private TextView titleTv;
@@ -43,6 +49,8 @@ public class SearchDetailsWebActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_details_web);
+        user = MyAppLocation.app.getUser();
+
         Intent intent=getIntent();
         id = intent.getStringExtra("id");
         url = intent.getStringExtra("url");
@@ -77,16 +85,36 @@ public class SearchDetailsWebActivity extends BaseActivity {
         shoucBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shoucang();
+                if (user != null) {
+                    shoucang();
+                } else {
+                    Toast.makeText(SearchDetailsWebActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         yscBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qxshoucang();
+                if (user != null) {
+                    qxshoucang();
+                } else {
+                    Toast.makeText(SearchDetailsWebActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         addHistory();
+    }
+
+    private void updateButton(boolean isCollect) {
+        if (isCollect) {
+            yscBtn.setVisibility(View.VISIBLE);
+            shoucBtn.setVisibility(View.GONE);
+        } else {
+            yscBtn.setVisibility(View.GONE);
+            shoucBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addHistory() {
