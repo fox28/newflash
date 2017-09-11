@@ -82,6 +82,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         home_et = (EditText) findViewById(R.id.home_et);
         searchline = (LinearLayout) findViewById(R.id.home_searchline);
         home_tv = (TextView) findViewById(R.id.home_tv);
+        /**
+         * 点击搜索栏，跳转SearchActivity
+         */
         searchline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +102,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), this, list, INDICATOR_TITLES));
         tabIndicator.setViewPager(viewPager);
+        // Glide使用
         if(user!= null){
             Glide.with(MainActivity.this)
                     .load(user.getUser_head_img())
