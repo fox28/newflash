@@ -34,4 +34,5 @@
     <color name="fragment_bg">#EFEFEF</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="gray_pressed">#b5b5b6</color>
 </resources>

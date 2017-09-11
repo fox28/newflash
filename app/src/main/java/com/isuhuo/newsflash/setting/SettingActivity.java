@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.isuhuo.newsflash.R;
+import com.isuhuo.newsflash.base.MyAppLocation;
 import com.isuhuo.newsflash.util.DataCleanManager;
+import com.isuhuo.newsflash.util.MFGT;
 import com.isuhuo.newsflash.util.ToastUtils;
+import com.isuhuo.newsflash.util.UserBeen;
 
 import java.io.File;
 
@@ -34,6 +38,9 @@ import butterknife.OnClick;
  */
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "SettingActivity";
+    private UserBeen user = new UserBeen();
+
     @BindView(R.id.setting_fanhui)
     LinearLayout settingFanhui;
     @BindView(R.id.iv_edit_next)
@@ -79,6 +86,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
 
+        user = MyAppLocation.app.getUser();
+        // 判断是否登录，然后显示/隐藏setEdit
+        if (user == null) {
+            setEdit.setVisibility(View.GONE);
+        } else {
+            setEdit.setVisibility(View.VISIBLE);
+        }
         //获取版本号
         initVersion();
         //获取缓存文件大小
@@ -107,15 +121,29 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @OnClick({R.id.setting_fanhui, R.id.iv_edit_next, R.id.set_clean, R.id.set_ziti, R.id.set_wifi, R.id.set_tuichu})
+    @OnClick({R.id.setting_fanhui, R.id.set_edit, R.id.set_clean, R.id.set_ziti, R.id.set_wifi, R.id.set_tuichu})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.setting_fanhui:
                 finish();
                 break;
-            case R.id.iv_edit_next: //编辑资料的图标
+            case R.id.set_edit: //编辑资料的图标
 
                 // TODO 判断是否登录
+                if (user != null) {
+                    MFGT.gotoPersonalSettingActivity(SettingActivity.this);
+                    setEdit.setVisibility(View.VISIBLE);
+                }
+//                else {
+//                    setEdit.setVisibility(View.GONE);
+//                }
+//                setEdit.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//
+//                    }
+//                });
+
                 break;
             case R.id.set_clean:    //点击清除缓存
                 parseCacheClean();
