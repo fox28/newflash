@@ -7,7 +7,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/registerBG">
+        android:background="@color/level0">
         <LinearLayout
             android:layout_marginLeft="5dp"
             android:layout_width="50dp"
