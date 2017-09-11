@@ -35,7 +35,7 @@ import com.isuhuo.newsflash.ui.adapter.FragmentAdapter;
 import com.isuhuo.newsflash.ui.fragment.MainBoutiqueFragment;
 import com.isuhuo.newsflash.ui.fragment.MainHotFragment;
 import com.isuhuo.newsflash.ui.fragment.MainBrowseFragment;
-import com.isuhuo.newsflash.setting.SettingActivity;
+import com.isuhuo.newsflash.util.MFGT;
 import com.isuhuo.newsflash.util.UserBeen;
 import com.isuhuo.newsflash.widget.MyImageView;
 import com.isuhuo.newsflash.widget.TabStripIndicator;
@@ -88,8 +88,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         searchline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+//                startActivity(intent);
+                MFGT.gotoSearchActivity(MainActivity.this);
             }
         });
 
@@ -124,8 +125,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }
             }
         });
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        left.setNavigationItemSelectedListener(this);
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -153,10 +154,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
 
-        View drawheadview = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        View drawheadview = left.inflateHeaderView(R.layout.nav_header_main);
         dengluLinear = (LinearLayout) drawheadview.findViewById(R.id.dengluLinear);
         weidenglLinear = (LinearLayout) drawheadview.findViewById(R.id.weidenglLinear);
-        if (user != null) {
+        if (user != null) { // 根据user判断登录状态，进而drawheadview显示不同的布局
             dengluLinear.setVisibility(View.VISIBLE);
             weidenglLinear.setVisibility(View.GONE);
         } else {
@@ -177,6 +178,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         wxIv.setOnClickListener(headerListener);
         QQIv.setOnClickListener(headerListener);
         sjIv.setOnClickListener(headerListener);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -195,10 +197,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     Intent intent2 = new Intent(MainActivity.this, HistoryAndCollectionActivity.class);
                     intent2.putExtra("hors", "shoucang");
                     MainActivity.this.startActivity(intent2);
+
                     break;
                 case R.id.xtszTv: // 系统设置按钮
-                    Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
-                    startActivity(intent4);
+//                    Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
+//                    startActivity(intent4);
+                    MFGT.gotoSettingActivity(MainActivity.this);
+
                     break;
                 case R.id.wxIv: // 微博登录
 
@@ -214,6 +219,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 default:
                     break;
             }
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        drawer.closeDrawer(GravityCompat.START);
+                    }
+                }
+            }.start();
+
         }
     };
 
@@ -237,9 +255,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    /**
+     * 重写实体键返回按钮的点击方法
+     * 如果抽屉控件打开，则关闭抽屉控件；否则关闭当前MainActivity
+     */
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -250,8 +271,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

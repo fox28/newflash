@@ -44,6 +44,7 @@ import com.isuhuo.newsflash.network.NormalPostRequest;
 import com.isuhuo.newsflash.network.URLMannager;
 import com.isuhuo.newsflash.ui.adapter.DongdongSuBaoAdapter;
 import com.isuhuo.newsflash.util.Kuaibao;
+import com.isuhuo.newsflash.util.MFGT;
 import com.isuhuo.newsflash.widget.LoadingDialog;
 
 public class SearchActivity extends AppCompatActivity {
@@ -75,7 +76,8 @@ public class SearchActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+//                finish();
+                MFGT.finish(SearchActivity.this);
             }
         });
         loadingDialog=new LoadingDialog(this);

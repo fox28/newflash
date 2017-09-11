@@ -5,6 +5,8 @@ import android.content.Intent;
 
 
 import com.isuhuo.newsflash.R;
+import com.isuhuo.newsflash.setting.SettingActivity;
+import com.isuhuo.newsflash.ui.activity.SearchActivity;
 import com.isuhuo.newsflash.ui.activity.login.LoginActivity;
 import com.isuhuo.newsflash.ui.activity.MainActivity;
 
@@ -15,18 +17,18 @@ import com.isuhuo.newsflash.ui.activity.MainActivity;
 public class MFGT {
     public static void finish(Activity activity) {
         activity.finish();
-        activity.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+        activity.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
     }
 
 
 
     public static void startActivity(Activity activity, Class cls) {
         activity.startActivity(new Intent(activity, cls));
-        activity.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+        activity.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
     }
     public static void startActivity(Activity activity, Intent intent) {
         activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+        activity.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
 
     }
 
@@ -54,6 +56,14 @@ public class MFGT {
     }
     public static void gotoLoginActivity(Activity activity, int requestCode) {
         startActivityForResult(activity, new Intent(activity, LoginActivity.class), requestCode);
+    }
+
+    public static void gotoSettingActivity(Activity activity) {
+        startActivity(activity, SettingActivity.class);
+    }
+
+    public static void gotoSearchActivity(Activity activity) {
+        startActivity(activity, SearchActivity.class);
     }
 
 }
