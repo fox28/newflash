@@ -36,6 +36,7 @@ import com.isuhuo.newsflash.ui.fragment.MainBoutiqueFragment;
 import com.isuhuo.newsflash.ui.fragment.MainHotFragment;
 import com.isuhuo.newsflash.ui.fragment.MainBrowseFragment;
 import com.isuhuo.newsflash.util.MFGT;
+import com.isuhuo.newsflash.util.SpUtils;
 import com.isuhuo.newsflash.util.UserBeen;
 import com.isuhuo.newsflash.widget.MyImageView;
 import com.isuhuo.newsflash.widget.TabStripIndicator;
@@ -95,7 +96,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
 
-        user = MyAppLocation.app.getUser();
+        initData();
 
         List<Fragment> list = new ArrayList<>();
         list.add(new MainBoutiqueFragment());
@@ -185,6 +186,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    private void initData() {
+        user = MyAppLocation.app.getUser();
+    }
+
     private View.OnClickListener headerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -230,8 +235,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case 2:
                 String tou = data.getStringExtra("denglu");
                 String dengluname = data.getStringExtra("dengluname");
-                Log.d("TAG","tou="+tou);
-                Log.d("dengluname","dengluname="+dengluname);
+//                Log.d("TAG","tou="+tou);
+//                Log.d("dengluname","dengluname="+dengluname);
                 if (tou != null && !tou.equals("")) {
                     dengluLinear.setVisibility(View.VISIBLE);
                     weidenglLinear.setVisibility(View.GONE);
@@ -264,4 +269,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+        updateUserProfile();
+
+    }
+
+    private void updateUserProfile() {
+        if(user!= null){
+            Log.e(TAG, "头像："+user.getUser_head_img());
+            Log.e(TAG, "昵称："+user.getName());
+            Glide.with(MainActivity.this)
+                    .load(user.getUser_head_img())
+                    .into(home_touxiang);
+            Glide.with(MainActivity.this)
+                    .load(user.getUser_head_img())
+                    .into(touxiangIv);
+            nameTv.setText(user.getName());
+        }
+    }
 }
