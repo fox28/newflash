@@ -25,24 +25,41 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.internal.http.multipart.FilePart;
+import com.android.internal.http.multipart.Part;
+import com.android.internal.http.multipart.StringPart;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.MyAppLocation;
+import com.isuhuo.newsflash.network.MultiPartRequest;
+import com.isuhuo.newsflash.network.URLMannager;
 import com.isuhuo.newsflash.ui.activity.MainActivity;
+import com.isuhuo.newsflash.ui.activity.login.RegisterActivity;
 import com.isuhuo.newsflash.ui.utils.ClipImageActivity;
 import com.isuhuo.newsflash.ui.utils.view.CircleImageView;
 import com.isuhuo.newsflash.util.MFGT;
 import com.isuhuo.newsflash.util.SingleVolleyRequestQueue;
 import com.isuhuo.newsflash.util.SpUtils;
+import com.isuhuo.newsflash.util.ToastUtils;
 import com.isuhuo.newsflash.util.UserBeen;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -123,13 +140,7 @@ public class PersonalSettingActivity extends AppCompatActivity {
                     //此处后面可以将bitMap转为二进制上传后台网络
                     //......
                     File file = saveBitmapFile(bitMap);
-                    Log.e(TAG, "file = " + file.getAbsolutePath());
-                    Log.e(TAG, "file = " + file.getAbsolutePath());
-                    Log.e(TAG, "file = " + file.getAbsolutePath());
-                    Log.e(TAG, "file = " + file.getAbsolutePath());
-                    Log.e(TAG, "file = " + file.getAbsolutePath());
-
-                    // TODO 服务器
+                    // 上传服务器
                     updateAvatar(file);
 
                 }
@@ -138,9 +149,54 @@ public class PersonalSettingActivity extends AppCompatActivity {
     }
 
     private void updateAvatar(File file) {
-        RequestQueue queue = SingleVolleyRequestQueue.getInstance(this).getRequestQueue();
-        Map<String, String> params = new HashMap<>();
-        params.put("uid", user.getId());
+
+        //构造参数列表
+        List<Part> partList = new ArrayList<Part>();
+        partList.add(new StringPart("uid", user.getId()));
+        try {
+            partList.add(new FilePart("file", file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        //获取队列
+        RequestQueue requestQueue = SingleVolleyRequestQueue.getInstance(this).getRequestQueue();
+        String url = "http://test/profileUpdate.do";
+        //生成请求
+        MultiPartRequest profileUpdateRequest = new MultiPartRequest(URLMannager.Base_URL+URLMannager.URL_UPDATE_AVATAR,
+                partList.toArray(new Part[partList.size()]), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //处理成功返回信息
+                Toast.makeText(getApplication(), "修改成功", Toast.LENGTH_SHORT).show();
+                // {"status":"success","msg":"\u64cd\u4f5c\u6210\u529f\uff01","data":{"url":"http:\/\/news.isuhuo.com\/Uploads\/User\/59b77cf3305ed.jpg"}}
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("status").equals("success")){
+                        ToastUtils.showToast(PersonalSettingActivity.this,jsonObject.getString("msg"));
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        SpUtils.putUser(PersonalSettingActivity.this,"user_head_img",data.getString("url"));
+                        user.setUser_head_img(data.getString("url"));
+                        MFGT.finish(PersonalSettingActivity.this);
+                    }else{
+                        ToastUtils.showToast(PersonalSettingActivity.this,jsonObject.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //处理失败错误信息
+                Log.e("MultipartRequest", error.getMessage(), error);
+                Toast.makeText(getApplication(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        //将请求加入队列
+        requestQueue.add(profileUpdateRequest);
     }
 
     @Override
