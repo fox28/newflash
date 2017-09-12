@@ -41,6 +41,7 @@ import com.isuhuo.newsflash.widget.MyImageView;
 import com.isuhuo.newsflash.widget.TabStripIndicator;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainActivity";
     public ViewPager viewPager;
     public TabStripIndicator tabIndicator;
     public static final Long[] STATUS = {1L, 2L, 3L};
@@ -219,19 +220,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 default:
                     break;
             }
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        drawer.closeDrawer(GravityCompat.START);
-                    }
-                }
-            }.start();
-
+            drawer.closeDrawer(GravityCompat.START);
         }
     };
 

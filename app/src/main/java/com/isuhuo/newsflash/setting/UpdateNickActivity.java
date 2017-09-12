@@ -72,11 +72,7 @@ public class UpdateNickActivity extends AppCompatActivity {
     private void updateNick() {
         params = new HashMap<>();
         params.put("uid", user.getId());
-        Log.e(TAG, "uid = " + user.getId());
-        Log.e(TAG, "uid = " + user.getId());
-        Log.e(TAG, "uid = " + user.getId());
         params.put("name", newNick);
-        Log.e(TAG, "name = "+newNick);
         // 获得请求队列
         RequestQueue mQueue = SingleVolleyRequestQueue.getInstance(this).getRequestQueue();
         Request<JSONObject> request = new NormalPostRequest(URLMannager.Base_URL + URLMannager.URL_UPDATE_NICK, new Response.Listener<JSONObject>() {
