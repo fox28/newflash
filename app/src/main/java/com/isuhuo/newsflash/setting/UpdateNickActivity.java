@@ -4,13 +4,28 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.isuhuo.newsflash.R;
 import com.isuhuo.newsflash.base.MyAppLocation;
+import com.isuhuo.newsflash.network.NormalPostRequest;
+import com.isuhuo.newsflash.network.SingleVolleyRequestQueue;
+import com.isuhuo.newsflash.network.URLMannager;
 import com.isuhuo.newsflash.util.MFGT;
+import com.isuhuo.newsflash.util.SpUtils;
 import com.isuhuo.newsflash.util.UserBeen;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,10 +33,14 @@ import butterknife.OnClick;
 
 
 public class UpdateNickActivity extends AppCompatActivity {
+    private static final String TAG = "UpdateNickActivity";
 
     private ProgressDialog dialog;
     private String newNick;
     private UserBeen user;
+
+    // 修改昵称
+    private Map<String, String> params;
 
     @BindView(R.id.et_update_user_nick)
     EditText mEtUpdateUserNick;
@@ -43,18 +62,41 @@ public class UpdateNickActivity extends AppCompatActivity {
                 break;
             case R.id.btn_save:
                 if (checkInput()) {
-                    // TODO 显示dialog: showDialog(); 后面分情况考虑dialog关闭；
-                    // TODO 实现修改用户昵称的接口
+                    updateNick();
+
                 }
                 break;
         }
     }
 
-    private void showDialog() {
-        dialog = new ProgressDialog(this);
-        dialog.setMessage(getString(R.string.update_user_nick));
-        dialog.show();
-    }
+    private void updateNick() {
+        params = new HashMap<>();
+        params.put("uid", user.getId());
+        Log.e(TAG, "uid = " + user.getId());
+        Log.e(TAG, "uid = " + user.getId());
+        Log.e(TAG, "uid = " + user.getId());
+        params.put("name", newNick);
+        Log.e(TAG, "name = "+newNick);
+        // 获得请求队列
+        RequestQueue mQueue = SingleVolleyRequestQueue.getInstance(this).getRequestQueue();
+        Request<JSONObject> request = new NormalPostRequest(URLMannager.Base_URL + URLMannager.URL_UPDATE_NICK, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                // 修改SharePreference
+                SpUtils.putUser(UpdateNickActivity.this, "name",newNick);
+                // 修改Application中user中内存
+                user.setName(newNick);
+                MFGT.finish(UpdateNickActivity.this);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(UpdateNickActivity.this, "修改失败："+volleyError, Toast.LENGTH_SHORT).show();
+            }
+        }, params);
+        mQueue.add(request);
+     }
+
 
     private boolean checkInput() {
         newNick = mEtUpdateUserNick.getText().toString().trim();

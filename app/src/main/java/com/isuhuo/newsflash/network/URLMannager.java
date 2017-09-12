@@ -23,4 +23,9 @@ public class URLMannager {
     public static final String URL_JPush = "Index/getPhoneids";
     public static final String URL_ApiLogin = "Public/login";
 
+    // 修改用户头像、昵称
+    public static final String URL_UPDATE_AVATAR = "User/editUserHead";
+    public static final String URL_UPDATE_NICK = "User/editName";
+
+
 }

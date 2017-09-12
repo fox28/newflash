@@ -36,17 +36,7 @@ public class PersonalSettingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         user = MyAppLocation.app.getUser();
-        initView();
-    }
-
-    private void initView() {
-        if (user != null) {
-            Glide.with(PersonalSettingActivity.this)
-                    .load(user.getUser_head_img())
-                    .into(mIvUserProfileAvatar);
-            // user.getName() == SpUtils.getUser(this, "name", null)
-            mTvUserProfileNick.setText(user.getName());
-        }
+        updatePersonalProfile();
     }
 
     @OnClick({R.id.backArea, R.id.layout_user_profile_avatar, R.id.layout_user_profile_nickname})
@@ -60,6 +50,22 @@ public class PersonalSettingActivity extends AppCompatActivity {
             case R.id.layout_user_profile_nickname:
                 MFGT.gotoUpdateNickActivity(PersonalSettingActivity.this);
                 break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePersonalProfile();
+    }
+
+    private void updatePersonalProfile() {
+        if (user != null) {
+            Glide.with(PersonalSettingActivity.this)
+                    .load(user.getUser_head_img())
+                    .into(mIvUserProfileAvatar);
+            // user.getName() == SpUtils.getUser(this, "name", null)
+            mTvUserProfileNick.setText(user.getName());
         }
     }
 }
