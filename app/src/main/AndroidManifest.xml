@@ -284,6 +284,7 @@
         </activity>
         <activity android:name=".setting.UpdateNickActivity">
         </activity>
+        <activity android:name=".ui.utils.ClipImageActivity"/>
     </application>
 
 </manifest>
