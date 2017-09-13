@@ -41,6 +41,7 @@ import java.util.Map;
 
 import com.isuhuo.newflash.R;
 import com.isuhuo.newflash.network.NormalPostRequest;
+import com.isuhuo.newflash.network.SingleVolleyRequestQueue;
 import com.isuhuo.newflash.network.URLMannager;
 import com.isuhuo.newflash.ui.adapter.DongdongSuBaoAdapter;
 import com.isuhuo.newflash.util.Kuaibao;
@@ -96,12 +97,16 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
-                    keyword="/keyword/"+s.toString();
+                    keyword = s.toString();
                 }else {
                     keyword="";
                 }
             }
         });
+        /**
+         * 软件盘的确定键的监听事件，
+         * 发起网络请求，获得搜索网络数据
+         */
         et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -111,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
                     count=1;
                     total=0;
                     loadingDialog.show();
-                    initData();
+                    initData();// 发起网络请求
                     return true;
                 }
                 return false;
@@ -161,8 +166,7 @@ public class SearchActivity extends AppCompatActivity {
         params.put("public_ids", "");
         params.put("ids", "");
         params.put("uid", "");
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
+        RequestQueue requestQueue = SingleVolleyRequestQueue.getInstance(SearchActivity.this).getRequestQueue();
         Request<JSONObject> request = new NormalPostRequest(URLMannager.Base_URL + URLMannager.Get_News,
 
                 new Response.Listener<JSONObject>() {
