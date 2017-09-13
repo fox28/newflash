@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.isuhuo.newsflash.ui.activity.SearchDetailsWebActivity"
+    tools:context="com.isuhuo.kuaibao.ui.activity.SearchDetailsWebActivity"
     tools:showIn="@layout/activity_search_details_web">
     <include layout="@layout/inc_head_view"/>
     <WebView
