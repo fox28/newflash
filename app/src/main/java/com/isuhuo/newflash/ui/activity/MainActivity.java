@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,9 +113,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         fankui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
-                startActivity(intent);
-
+                if (user == null) {
+                    Toast.makeText(MainActivity.this, "请您先登录", Toast.LENGTH_SHORT).show();
+                    MFGT.gotoLoginActivity(MainActivity.this);
+                } else {
+                    MFGT.gotoFeedbackActivity(MainActivity.this);
+                }
+//                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+//                startActivity(intent);
             }
         });
         home_touxiang.setOnClickListener(new View.OnClickListener() {

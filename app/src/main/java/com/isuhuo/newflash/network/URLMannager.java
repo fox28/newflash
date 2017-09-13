@@ -27,5 +27,8 @@ public class URLMannager {
     public static final String URL_UPDATE_AVATAR = "User/editUserHead";
     public static final String URL_UPDATE_NICK = "User/editName";
 
+    // 发布反馈
+    public static final String URL_FEEDBACK = "Index/addFeedback";
+
 
 }

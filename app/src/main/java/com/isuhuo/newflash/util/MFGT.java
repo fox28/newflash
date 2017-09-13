@@ -5,6 +5,7 @@ import android.content.Intent;
 
 
 import com.isuhuo.newflash.R;
+import com.isuhuo.newflash.feedback.FeedbackActivity;
 import com.isuhuo.newflash.setting.PersonalSettingActivity;
 import com.isuhuo.newflash.setting.SettingActivity;
 import com.isuhuo.newflash.setting.UpdateNickActivity;
@@ -73,5 +74,9 @@ public class MFGT {
     }
     public static void gotoUpdateNickActivity(Activity activity) {
         startActivity(activity, UpdateNickActivity.class);
+    }
+
+    public static void gotoFeedbackActivity(Activity activity) {
+        startActivity(activity, FeedbackActivity.class);
     }
 }
