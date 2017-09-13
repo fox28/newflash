@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.isuhuo.kuaibao"
+          package="com.isuhuo.newflash"
           xmlns:tools="http://schemas.android.com/tools"
     >
 
@@ -13,11 +13,11 @@
     <!-- jpush 极光推送-->
     <!-- Required -->
     <permission
-        android:name="com.isuhuo.kuaibao.permission.JPUSH_MESSAGE"
+        android:name="com.isuhuo.newflash.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
-    <uses-permission android:name="com.isuhuo.kuaibao.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="com.isuhuo.newflash.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -44,13 +44,13 @@
 
 
     <application
-        android:name="com.isuhuo.kuaibao.base.MyAppLocation"
+        android:name="com.isuhuo.newflash.base.MyAppLocation"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="快报"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.isuhuo.kuaibao.ui.activity.MainActivity">
+        <activity android:name="com.isuhuo.newflash.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -65,32 +65,32 @@
             android:value="@integer/google_play_services_version"/>
 
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.SearchDetailsWebActivity"
+            android:name="com.isuhuo.newflash.ui.activity.SearchDetailsWebActivity"
             android:label="@string/title_activity_su_bao_web"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.SearchActivity"
+            android:name="com.isuhuo.newflash.ui.activity.SearchActivity"
             android:label="@string/title_activity_su_bao_find"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.HistoryAndCollectionActivity"
+            android:name="com.isuhuo.newflash.ui.activity.HistoryAndCollectionActivity"
             android:label="@string/title_activity_history_news"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.login.LoginActivity"
+            android:name="com.isuhuo.newflash.ui.activity.login.LoginActivity"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.login.ForgetPasswordActivity"
+            android:name="com.isuhuo.newflash.ui.activity.login.ForgetPasswordActivity"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.login.RegisterActivity"
+            android:name="com.isuhuo.newflash.ui.activity.login.RegisterActivity"
             android:theme="@style/AppTheme.ShouCang"/>
         <activity
-            android:name="com.isuhuo.kuaibao.ui.activity.login.AgreementActivity"
+            android:name="com.isuhuo.newflash.ui.activity.login.AgreementActivity"
             android:theme="@style/AppTheme.ShouCang"/>
-        <activity android:name="com.isuhuo.kuaibao.feedback.FeedbackActivity"/>
-        <activity android:name="com.isuhuo.kuaibao.ui.activity.DetailActivity"/>
-        <activity android:name="com.isuhuo.kuaibao.setting.SettingActivity"/>
+        <activity android:name="com.isuhuo.newflash.feedback.FeedbackActivity"/>
+        <activity android:name="com.isuhuo.newflash.ui.activity.DetailActivity"/>
+        <activity android:name="com.isuhuo.newflash.setting.SettingActivity"/>
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -166,7 +166,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.isuhuo.kuaibao" />
+                <category android:name="com.isuhuo.newflash" />
             </intent-filter>
         </activity>
 
@@ -183,7 +183,6 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
             </intent-filter>
         </service>
-
         <!-- Required SDK核心功能-->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
@@ -191,7 +190,7 @@
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
-                <category android:name="com.isuhuo.kuaibao" />
+                <category android:name="com.isuhuo.newflash" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -205,21 +204,19 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" android:exported="false"/>
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="027b25754d81988c000275f8" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="df1e2b74031621f6cab8bb0c" /> <!--  </>值来自开发者平台取得的AppKey-->
 
 
-
-        <activity android:name="com.isuhuo.kuaibao.setting.PersonalSettingActivity">
+        <activity android:name="com.isuhuo.newflash.setting.PersonalSettingActivity">
         </activity>
-        <activity android:name="com.isuhuo.kuaibao.setting.UpdateNickActivity">
+        <activity android:name="com.isuhuo.newflash.setting.UpdateNickActivity">
         </activity>
-        <activity android:name="com.isuhuo.kuaibao.ui.utils.ClipImageActivity"/>
+        <activity android:name="com.isuhuo.newflash.ui.utils.ClipImageActivity"/>
     </application>
 
 </manifest>

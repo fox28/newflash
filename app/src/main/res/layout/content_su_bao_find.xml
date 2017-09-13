@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.isuhuo.kuaibao.ui.activity.SearchActivity"
+    tools:context="com.isuhuo.newflash.ui.activity.SearchActivity"
     tools:showIn="@layout/activity_search">
 
 </RelativeLayout>
